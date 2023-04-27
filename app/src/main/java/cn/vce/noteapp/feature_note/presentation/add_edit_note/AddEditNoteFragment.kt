@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -69,6 +70,7 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
                     content.setText(it)
                     content.setSelection(it.length)
                 })
+                val searchView: SearchView
                 noteColor.observe(viewLifecycleOwner, Observer {
                     binding.root.setBackgroundColor(it)
                     colorRecyclerView.adapter = ColorAdapter(this@AddEditNoteFragment, object:
