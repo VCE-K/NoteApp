@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,13 +27,12 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
 
     val viewModel: AddEditNoteViewModel by viewModels()
 
-    lateinit var binding: FragmentAddEditNoteBinding
+    private lateinit var binding: FragmentAddEditNoteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = FragmentAddEditNoteBinding.inflate(layoutInflater)
         binding.apply {
             title.apply {
@@ -62,16 +59,15 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
 
 
             viewModel.apply {
-                noteTitle.observe(viewLifecycleOwner, Observer {
+                noteTitle.observe(viewLifecycleOwner) {
                     title.setText(it)
                     title.setSelection(it.length)
-                })
-                noteContent.observe(viewLifecycleOwner, Observer {
+                }
+                noteContent.observe(viewLifecycleOwner) {
                     content.setText(it)
                     content.setSelection(it.length)
-                })
-                val searchView: SearchView
-                noteColor.observe(viewLifecycleOwner, Observer {
+                }
+                noteColor.observe(viewLifecycleOwner) {
                     binding.root.setBackgroundColor(it)
                     colorRecyclerView.adapter = ColorAdapter(this@AddEditNoteFragment, object:
                         ColorAdapter.ItemClickListener{
@@ -92,7 +88,7 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
                             }
                         }
                     })
-                })
+                }
             }
         }
 
@@ -106,7 +102,6 @@ class AddEditNoteFragment : BaseFragment(R.layout.fragment_add_edit_note) {
                 }
             }
         }.launchIn(lifecycleScope)
-
         return binding.root
     }
 
