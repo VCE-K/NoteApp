@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NoteApp</string>
+
+
+    <string name="copy">copy</string>
+    <string name="delete">delete</string>
+</resources>

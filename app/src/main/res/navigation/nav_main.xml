@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/notesFragment">
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:label="Your note"
+        android:name="cn.vce.noteapp.feature_note.presentation.notes.NotesFragment">
+        <action
+            android:id="@+id/action_notesFragment_to_addEditFragment"
+            app:destination="@+id/addEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditFragment"
+        android:name="cn.vce.noteapp.feature_note.presentation.add_edit_note.AddEditNoteFragment"
+        android:label="addEdit note">
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+       <!-- edit编辑和copy复制类型-->
+        <argument
+            android:name="type"
+            app:argType="string"
+            android:defaultValue="edit"/>
+    </fragment>
+</navigation>
